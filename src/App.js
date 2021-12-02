@@ -8,7 +8,9 @@ function App() {
     provider: null,
     web3: null
   })
+  const [account, setAccount] = useState(null)
 
+  // connect to ethereum
   useEffect(() => {
     const loadProvider = async () => {
       let provider = null;
@@ -17,7 +19,7 @@ function App() {
         provider = window.ethereum
 
         try {
-          await provider.enable();
+          await provider.request({method: "eth_requestAccounts"});
         } catch {
           console.error("user denied accounts access")
         }
@@ -36,21 +38,29 @@ function App() {
     loadProvider()
   }, [])
 
-  console.log(web3Api.web3)
+  // get accounts
+  useEffect(() => {
+    const getAccount = async () => {
+      const accounts = await web3Api.web3.eth.getAccounts()
+      setAccount(accounts[0])
+    }
+    web3Api.web3 && getAccount()
+  }, [web3Api.web3])
+
 
   return (
     <>
      <div className="faucet-wrapper">
       <div className="faucet">
+        <span>
+          <strong>Account: </strong>
+        </span>
+        <h1>
+          { account ? account : "not connected" }
+        </h1>
         <div className="balance-view is-size-2">
           Current Balance: <strong>10</strong> ETH
         </div>
-        <button 
-        className="btn mr-2" 
-          onClick={async () => {
-            const accounts = await window.ethereum.request({method: "eth_requestAccounts"})
-            console.log(accounts)
-          }}>Enable Ethereum </button>
         <button className="btn mr-2">Donate</button>
         <button className="btn">Withdraw</button>
       </div>
