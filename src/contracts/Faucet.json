@@ -12,7 +12,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -25,18 +26,21 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [],
       "name": "addFunds",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -62,7 +66,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -81,7 +86,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"addFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllFunders\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"index\",\"type\":\"uint8\"}],\"name\":\"getFunderAtIndex\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numOfFunders\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"withdrawAmount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Faucet.sol\":\"Faucet\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Faucet.sol\":{\"keccak256\":\"0x3beb81980d55499a67bd1b274b0e80d412caf7ee811a749e49f55569c3425077\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eeb69e2ba0a473d93c250b95b5ce56ad4b4153d23b6c049ddb2d0e972415020f\",\"dweb:/ipfs/QmawFab1J4JguPAnigaKvJAWKLLR6a1CqVjwW4J76z18Lt\"]},\"project:/contracts/IFaucet.sol\":{\"keccak256\":\"0x23d45b5c6d2a64bba4eabb36574e52529da3f9ddbea7a51c852bcf9f1fd7ff3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e6c69cb620918b317de2e7b3c4b01bdb78ebe10e477bc4ecc93d614adb890e9b\",\"dweb:/ipfs/QmPe7Pgqsi6eBu8hsWb3eZzYzZfjafzp2Nv4e5DdzhYfMb\"]},\"project:/contracts/Logger.sol\":{\"keccak256\":\"0x1e7b661067e71aea3e666c7af7db5e7af7487e8f2b634e249579799757980669\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e3420ddc3b1096403ba513b793f276cfaec8b67db86ad8da5ba15650a028bff\",\"dweb:/ipfs/QmSXJen6QcJppd4jfyfjfTZtawJdjHXL1v3yqsbSFjMANm\"]},\"project:/contracts/Owned.sol\":{\"keccak256\":\"0xefbc4c3d83869e62c4bacd022f6e0c37a02a9ef9f1e6d07242cb21099988e401\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6ea49ef36c29777fd04b40a94b5574a05b5e0aadfff58ee9122f3c5534727b4f\",\"dweb:/ipfs/QmTQazUANgo9ybcw86fbiCPD9pxVqjjc4wF9eQxVJuWt1A\"]}},\"version\":1}",
@@ -6538,9 +6544,17 @@
     "name": "solc",
     "version": "0.8.10+commit.fc410830.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xF071Efe79536cd3810145967F5007A79CA363eFE",
+      "transactionHash": "0x13ef3b2a89ce654b06f9ad4b028e52a6f166e25f38e15acbe1ed2c112be4dcf5"
+    }
+  },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-12-02T12:23:56.207Z",
+  "updatedAt": "2021-12-02T12:41:54.191Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
+    "@truffle/contract": "^4.3.42",
     "bulma": "^0.9.3",
     "cra-template": "1.1.2",
     "react": "^17.0.2",
