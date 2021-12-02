@@ -19,6 +19,13 @@ contract Faucet {
             lutFunders[index] = funder;
         }
     }
+
+    // withdraw function
+    function withdraw(uint withdrawAmount) external {
+        require(withdrawAmount <= 100000000000000000 ether, "Withdraw amount greater than 0.1 ether");
+        payable (msg.sender).transfer(withdrawAmount);
+    }
+
     // get all founders
     function getAllFunders() external view returns (address[] memory) {
         address[] memory _funders = new address[](numOfFunders);
