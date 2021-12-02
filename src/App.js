@@ -13,6 +13,9 @@ function App() {
 
   const [balance, setBalance] = useState(null)
   const [account, setAccount] = useState(null)
+  const [shouldReload, reload] = useState(false)
+
+  const reloadEffect = () => reload(!shouldReload)
 
   // connect to ethereum
   useEffect(() => {
@@ -44,7 +47,7 @@ function App() {
     }
 
     web3Api.contract && loadBalance()
-  }, [web3Api])
+  }, [web3Api, shouldReload])
 
   // get accounts
   useEffect(() => {
@@ -62,6 +65,7 @@ function App() {
       from: account,
       value: web3.utils.toWeu("1", "ether")
     })
+    reloadEffect()
   }, [web3Api, account])
 
 
