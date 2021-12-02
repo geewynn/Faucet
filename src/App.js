@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import detectEthereumProvider from '@metamask/detect-provider'
 import Web3 from "web3";
 import "./App.css";
@@ -55,6 +55,15 @@ function App() {
     web3Api.web3 && getAccount()
   }, [web3Api.web3])
 
+  // add funds
+  const addFunds = useCallback(async() => {
+    const { contract, web3 } = web3Api
+    await contract.addFunds({
+      from: account,
+      value: web3.utils.toWeu("1", "ether")
+    })
+  }, [web3Api, account])
+
 
   return (
     <>
@@ -75,7 +84,7 @@ function App() {
         <div className="balance-view is-size-2 my-4">
           Current Balance: <strong>{balance}</strong> ETH
         </div>
-        <button className="button is-link mr-2">Donate</button>
+        <button onClick={addFunds} className="button is-link mr-2">Donate 1eth</button>
         <button className="button is-primary">Withdraw</button>
       </div>
      </div>
