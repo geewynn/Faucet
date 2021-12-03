@@ -15,7 +15,11 @@ function App() {
   const [account, setAccount] = useState(null)
   const [shouldReload, reload] = useState(false)
 
-  const reloadEffect = () => reload(!shouldReload)
+  const reloadEffect = useCallback(() => reload(!shouldReload), [shouldReload])
+  
+  const setAccountListener = provider => {
+    provider.on("accountsChanged", accounts => setAccount(accounts[0]))
+  }
 
   // connect to ethereum
   useEffect(() => {
@@ -24,6 +28,7 @@ function App() {
       const contract  = await loadContract("Faucet", provider)
       
       if (provider) {
+        setAccountListener(provider)
         setWeb3Api({
           web3: new Web3(provider),
           provider,
@@ -43,7 +48,7 @@ function App() {
     const loadBalance = async () => {
       const { contract, web3 } = web3Api
       const balance = await web3.eth.getBalance(contract.address)
-      setBalance(web3.utils.toWei(balance, "ether"))
+      setBalance(web3.utils.fromWei(balance, "ether"))
     }
 
     web3Api.contract && loadBalance()
@@ -63,10 +68,19 @@ function App() {
     const { contract, web3 } = web3Api
     await contract.addFunds({
       from: account,
-      value: web3.utils.toWeu("1", "ether")
+      value: web3.utils.toWei("1", "ether")
     })
     reloadEffect()
-  }, [web3Api, account])
+  }, [web3Api, account, reloadEffect])
+
+  const withdraw = async () => {
+    const { contract, web3 } = web3Api
+    const withdrawAmount = web3.utils.toWei("0.1", "ether")
+    await contract.withdraw(withdrawAmount, {
+      from: account
+    })
+    reloadEffect()
+  }
 
 
   return (
@@ -89,7 +103,7 @@ function App() {
           Current Balance: <strong>{balance}</strong> ETH
         </div>
         <button onClick={addFunds} className="button is-link mr-2">Donate 1eth</button>
-        <button className="button is-primary">Withdraw</button>
+        <button onClick={withdraw} className="button is-primary">Withdraw</button>
       </div>
      </div>
     </>
