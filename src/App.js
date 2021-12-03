@@ -18,7 +18,7 @@ function App() {
   const reloadEffect = useCallback(() => reload(!shouldReload), [shouldReload])
   
   const setAccountListener = provider => {
-    provider.on("accountsChanged", accounts => setAccount(accounts[0]))
+    provider.on("accountsChanged", _ => window.location.reload())
   }
 
   // connect to ethereum
@@ -102,8 +102,8 @@ function App() {
         <div className="balance-view is-size-2 my-4">
           Current Balance: <strong>{balance}</strong> ETH
         </div>
-        <button onClick={addFunds} className="button is-link mr-2">Donate 1eth</button>
-        <button onClick={withdraw} className="button is-primary">Withdraw</button>
+        <button disabled={!account} onClick={addFunds} className="button is-link mr-2">Donate 1eth</button>
+        <button disabled={!account} onClick={withdraw} className="button is-primary">Withdraw</button>
       </div>
      </div>
     </>
